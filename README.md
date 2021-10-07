@@ -13,4 +13,4 @@ We would like to have guides for the following tasks.
 
 ## Contact
 
-Please contact us via the "issues" in the github repository if you want to contribute or see something new.
+Please contact us via the "issues" in the github repository if you want to see something new or if you have any questions. If you want to contribute you can either contact via "issues" or send a PR directly.
