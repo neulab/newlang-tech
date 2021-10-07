@@ -5,7 +5,7 @@ It is useful to allow communication between people who don't speak a common lang
 
 ## Obtaining Data
 
-In general to train a machine translation system between two languages A and B, one needs to have *parallel data* for those two languages, that is, a corpus of sentences in language A and the corresponding translation for in language B.
+In general to train a machine translation system between two languages A and B, one needs to have *parallel data* for those two languages, that is, a corpus of sentences in language A and the corresponding translation for them in language B.
 
 ### Using Existing Corpora
 
@@ -13,7 +13,7 @@ Fortunately, there already exist parallel corpora for many language pairs
 
 * [OPUS](https://opus.nlpl.eu/): A collection of translated texts collected from the internet, already preprocessed. It covers over 100 languages, with different corpora for each language pair.
 
-##£ Mining Data from the Internet
+### Mining Data from the Internet
 
 TODO: Elaborate more on this
 
