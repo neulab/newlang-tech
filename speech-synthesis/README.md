@@ -1,23 +1,24 @@
 # Building Speech Synthesis for New Languages
 
 Speech synthesis is the task of generating speech from text. It is useful if you want to build a speech interface.
-For a speech synthesizer, we usually require voice recordings from one person.
+For a speech synthesizer, voice recordings from one person is usually required for consistency and natural sounding output.
 
-## Collecting Data
+## 1. Collecting Data
 
 There are many sources for speech data that can be used to train systems. It'd be a good idea to take a look here to see if there is data that you can use.
 
 * [CMU Wilderness Corpus](https://github.com/festvox/datasets-CMU_Wilderness): This is a very broad corpus with 699 languages.
 
-## Creating Data
+If there is none, follow the steps in [Creating Data](#2-creating-data) section to create a corpus.
+## 2. Creating Data
 The goal here is to create a speech corpus of aligned speech recordings and their transcriptions to be used to build the synthesizer. 
 1. Gather textual sentences in your language. You should aim at getting atleast 1 million words. Keep in mind:
    - The copyright of the data you have gathered; make sure it is sufficient for your usage and distribution needs
    - The text should be in the same encoding
 2. Select good sentences from this corpus to be used  to build your synthesizer. There is documentation on how to do it [here](http://festvox.org/bsv/c2176.html).
-You will need software to run the instructions on the documentation. Follow the instructions [here from CMU Wilderness](https://github.com/festvox/datasets-CMU_Wilderness) from *Prerequisites* to *Make Dependencies* sections.
+You will need software to run the instructions on the documentation. Follow [these instructions](https://github.com/festvox/datasets-CMU_Wilderness) from CMU Wilderness project from the *Prerequisites* to the *Make Dependencies* sections.
 At the end of these steps, you should have your recorded speech corpus ready for the next step.
-3. Identify a voice talent who is fluent in the language you are working on.
+3. Identify a voice talent who is fluent in the language and/or domain you are working on.
 4. Record the selected sentences.
 ### Recording tips
 * There should be little to no noise, a studio environment is best
@@ -26,15 +27,15 @@ At the end of these steps, you should have your recorded speech corpus ready for
 * If you are going to record in multiple sessions, record at the same time period to avoid variations in the voice eg at 11:00 am - 12:30 pm for all your sessions.
 * The utterances should be consistent in terms of speed etc. Avoid excited speech as it has a lot of variations
 * If you are recording a bunch of sentences continuously in one recording, make sure the voice talent gives a hint as to which sentence they are reading such that it will be easier to process eg " [pause from last sentence, sentence8] sentence9 [pause] This is sentence9 that I am reading"
-## Training a Speech Synthesizer
+## 3. Training a Speech Synthesizer
 
 
 TODO: This should be filled in.
 
-## Evaluating Synthesizer Accuracy
+## 4. Evaluating Synthesizer Accuracy
 
 TODO: Evaluating synthesizer accuracy info.
 
-## Improving Your System
+## 5. Improving Your System
 
 TODO: Once the system is created, there are several ways to improve it.
