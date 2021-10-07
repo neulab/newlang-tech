@@ -21,3 +21,7 @@ TODO: This should be filled in.
 ## Evaluating Synthesizer Accuracy
 
 TODO: Evaluating synthesizer accuracy info.
+
+## Improving Your System
+
+TODO: Once the system is created, there are several ways to improve it.

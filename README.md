@@ -8,7 +8,7 @@ We would like to have guides for the following tasks.
 * Optical Character Recognition
 * Part-of-speech, Morphological Analysis
 * Full Syntactic Analysis
-* Named Entity Recognition
+* [Named Entity Recognition](named-entity-recognition/)
 * Machine Translation
 
 ## Contact
