@@ -10,7 +10,7 @@ We would like to have guides for the following tasks.
 * Part-of-speech, Morphological Analysis
 * Full Syntactic Analysis
 * [Named Entity Recognition](named-entity-recognition/)
-* Machine Translation
+* [Machine Translation](machine-translation/)
 
 ## Contact
 
