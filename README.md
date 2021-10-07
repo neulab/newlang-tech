@@ -5,6 +5,7 @@ We would like to have guides for the following tasks.
 
 * [Speech Synthesis](speech-synthesis/)
 * Speech Recognition
+* Optical Character Recognition
 * Part-of-speech, Morphological Analysis
 * Full Syntactic Analysis
 * Named Entity Recognition
