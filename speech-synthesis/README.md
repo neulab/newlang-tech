@@ -30,7 +30,7 @@ At the end of these steps, you should have your recorded speech corpus ready for
 * The utterances should be consistent in terms of speed etc. Avoid excited speech as it has a lot of variations. 
 * If you are recording a bunch of sentences continuously in one recording, make sure the voice talent gives a hint as to which sentence they are reading such that it will be easier to process eg 
  
-     " [PAUSE from last sentence, sentence8] sentence9 [PAUSE] I am curently reading sentence9. [PAUSE] ....."
+     " ... sentence9   I am currently reading sentence9.  ....."
 ## 3. Training a Speech Synthesizer
 
 
