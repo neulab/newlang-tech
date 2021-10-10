@@ -8,18 +8,18 @@ By now you have a dataset(s) with text from which you want to select the best se
 * Short enough for the voice talent to be willing to say it.
 ## Install the tools
 The tools needed run on a Linux environment. If you do not have one and are using Windows OS you can install Ubuntu app and use it by following instructions on [the official documentation](https://ubuntu.com/tutorials/ubuntu-on-windows#1-overview).
-###Prerequisites
+### Prerequisites
 After you have your Linux environment and terminal set up, do the following to install ubuntu packages:
 ```
 sudo apt-get install git build-essential libncurses5-dev sox wget
 sudo apt-get install csh ffmpeg html2text
 ```
-###Clone the repository
+### Clone the repository
 ```
 git clone https://github.com/festvox/datasets-CMU_Wilderness
 cd datasets-CMU_Wilderness
 ```
-###Make dependencies
+### Make dependencies
 ```
 ./bin/do_found make_dependencies
 ```
@@ -31,15 +31,14 @@ Replace path in the following commands with the path to your ``datasets-CMU_Wild
 export FESTVOXDIR=/path/build/festvox
 export ESTDIR=/path/build/speech_tools
 ```
-##Run the tools
+## Run the tools
 
-Follow the steps below to obtain a set of good sentences from your dataset(s).You can have your data in one file or in many files. Working files will be created in the current directory so if you were still in the ``datasets-CMU_Wilderness`` directory you need to change to 
-your preferred storage location. 
+Follow the steps below to obtain a set of good sentences from your dataset(s).You can have your data in one file or in many files.
+Working files will be created in the current directory so change directories to your preferred storage location. 
 
 *Hint*: If you are using WSL(Ubuntu on Windows) you can access your Windows file system by ``\mnt\c``.
 
 ### 1. Find word frequencies of all the tokens in the text data
-TEXT0.txt TEXT1.txt are the names of your files. 
 ```
 $FESTVOXDIR/src/promptselect/make_nice_prompts find_freq TEXT0.txt TEXT1.txt TEXT2.txt
 ```
@@ -56,7 +55,7 @@ This step can take a number of hours to finish processing.
 $FESTVOXDIR/src/promptselect/make_nice_prompts find_nice TEXT0 TEXT1 ...
 ```
 The 'nice' utterances can be found in ``data_nice.data`` file in your current directory.
-It is worth going through the sentences selected and figuring out if they are good enough to be in the final prompt set. Based on your findings you might want to run the process all over again to look for a different outcome.
+It is worth going through the sentences selected and figuring out if they are good enough to be in the final prompt set. Based on your findings you might want to run the process all over again for a different outcome.
 ### 4. A shortcut
 You can do the whole process with: 
 ``` $FESTVOXDIR/src/promptselect/make_nice_prompts do_all_asis TEXT0.txt TEXT1.txt```
