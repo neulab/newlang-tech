@@ -4,7 +4,7 @@ This is a community effort meant to be a guide to best practices regarding build
 We would like to have guides for the following tasks.
 
 * [Speech Synthesis](speech-synthesis/)
-* Speech Recognition
+* [Speech Recognition](speech-recognition/)
 * Optical Character Recognition
 * Part-of-speech, Morphological Analysis
 * Full Syntactic Analysis
