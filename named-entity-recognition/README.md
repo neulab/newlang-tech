@@ -16,17 +16,38 @@ You can also create data yourself if it doesn't exist.
 * Start by collecting unlabelled texts from popular domains like News articles or Wikipedia. If unlabelled texts do not exist, you can translate some sentences. 
 * Start with few sets of entities especially the popular ones like Personal names (PER), organization (ORG), and location (LOC) or geopolitical entities (GPE). With few sets of entities, one can easily ensure high quality annotation since fine-grained entities and numerous entities can affect the quality of the overall process especially for non-expert annotators. 
 * Familiarize yourself with annotation guides that have been used to develop popular NER datasets like the Message Understanding Conference [(MUC-6)guideline](https://cs.nyu.edu/faculty/grishman/NEtask20.book_1.html) and [LDC guideline](https://www.ldc.upenn.edu/sites/www.ldc.upenn.edu/files/english-entities-guidelines-v6.6.pdf)
-* 
-TODO: A good procedure to do this should be filled in.
+* Look for an easy to use annotation tool like [ELISA](https://aclanthology.org/P18-4001/), [brat](https://brat.nlplab.org/index.html), [Prodigy](https://prodi.gy/), [LightTag](https://www.lighttag.io/), [ioAnnotator](https://ioannotator.com/),  etc. Some provide the tool free for academic use.
+* Create your own annotation guide with examples in the language or domain of interest. Preferrably, with examples from the annotation tool.
+* (Optionally) Create a pre-recorded video on how to use the tool especially if you are working with non-expert annotators. 
+* Recruit odd number of annotators if possible, so that their inter-agreement score can be compared and you can do majority vote. Set your required inter-agreement score to be high (e.g at least 0.95) especially for the trial examples. 
+* Ask your annotators to start with a few set of sentences e.g 10 or 100, and evaluate their inter-agreement scores. Some tools provide this for you. 
+* When annotation is done, prepare your final dataset in CoNLL format i.e <word>[space]<tag>, and sentences are demarcated with an additional empty line. An example is [here](https://github.com/masakhane-io/masakhane-ner/blob/main/data/pcm/dev.txt). The recommended tagging scheme is BIO or IOB2 where "B-" signifies the beginning of an entity, "I-" signifies the inside of an entity and "O"- outside of an entity or no entity. Other tagging schemes are IOBES and IOB1.  
+
+ TODO: A good procedure to do this should be filled in.
 
 ## Training a Named Entity Recognition System
+  
+There are several NER models that can be trained, the popular ones are:
+* CNN-BiLSTM-CRF model: words are encoded using words and character embeddings, then passed into a BiLSTM model to obtain a richer representation, before using the Conditional Random Field for token classification. There are many open source tools, one of the popular ones are [NCRF++](https://github.com/jiesutd/NCRFpp). 
+
+* Fine-tuning pre-trained language models like BERT: You can use the official token classification code from [HuggingFace Transformers](https://github.com/huggingface/transformers/tree/master/examples/pytorch/token-classification). Fine-tuned LM produces the state-of-the-art for this task. For other languages apart from English, you need to use multilingual variants of the pre-trained LM e.g mBERT, XLM-RoBERTa, InfoXLM, RemBERT, etc.
 
 TODO: This should be filled in.
 
 ## Evaluating Entity Recognition Accuracy
-
+  
+Accuracy of NER is measured using span F1-score i.e the model is penalized if it cannot sequentially detect a span of entities e.g "New York". Just correctly identifying "York" will result in incorrect prediction of both "New" and "York". 
+  
+You can use the official [CoNLL Eval scripts](https://www.clips.uantwerpen.be/conll2000/chunking/conlleval.txt) to compute this or other open-sourced tools like [seqeval](https://pypi.org/project/seqeval/)
+  
 TODO: Evaluating NER accuracy info.
 
 ## Improving on Your System
+  
+Improving NER models is still a subject of research. A few effective methods are:
+  
+* Incorporating Gazetteers e.g entity lists from Wikidata. For example [SoftGaz]() gives good result for low-resource languages. Also, entity list can be use for distant supervision combined with [noise handing](https://aclanthology.org/2020.emnlp-main.204/) or [self-training](https://dl.acm.org/doi/abs/10.1145/3394486.3403149). 
+  
+* Transfer learning - could be with language adaptive fine-tuning for [new domain](https://arxiv.org/abs/2004.10964) or [new language](https://arxiv.org/abs/2103.11811) or zero-shot transfer from high resource language/domain. 
 
 TODO: Once you have a system, how can you improve it.
