@@ -13,6 +13,10 @@ There are some sources for labeled NER data that can be used to train systems.
 
 You can also create data yourself if it doesn't exist.
 
+* Start by collecting unlabelled texts from popular domains like News articles or Wikipedia. If unlabelled texts do not exist, you can translate some sentences. 
+* Start with few sets of entities especially the popular ones like Personal names (PER), organization (ORG), and location (LOC) or geopolitical entities (GPE). With few sets of entities, one can easily ensure high quality annotation since fine-grained entities and numerous entities can affect the quality of the overall process especially for non-expert annotators. 
+* Familiarize yourself with annotation guides that have been used to develop popular NER datasets like the Message Understanding Conference [(MUC-6)guideline](https://cs.nyu.edu/faculty/grishman/NEtask20.book_1.html) and [LDC guideline](https://www.ldc.upenn.edu/sites/www.ldc.upenn.edu/files/english-entities-guidelines-v6.6.pdf)
+* 
 TODO: A good procedure to do this should be filled in.
 
 ## Training a Named Entity Recognition System
