@@ -4,7 +4,9 @@ Speech recognition is a task to transcribe speech into text. It is useful if you
 
 ## Collecting Data
 
-The availability of training set typically depends on your target language. We consider 4-levels based on the ranks of speaker population..
+The availability of training set typically depends on your target language. 
+
+We can classify all languages into 4 groups depending on the amount of training set, the group is highly related to the each language's speaker population and economic factors.
 
 ### English and Mandarin (> 10k hours)
 
@@ -43,15 +45,19 @@ TODO (xinjianl): explain how to create dataset from scratch
 
 ## Training a Speech Recognition
 
-### Setup a ESPnet recipe
+In this section, we describe how to train a speech recognition model using the [ESPnet framework](https://github.com/espnet/espnet)
 
 If you are not familiar with ESPnet, you should watch this [Youtube tutorial](https://www.youtube.com/watch?v=2mRz3wH1vd0)
+
+
+### Setup a ESPnet recipe
+
+TODO
 
 
 ### Training model
 
 TODO: This should be filled in.
-
 
 
 ## Evaluating Speech Recognition Accuracy
@@ -61,3 +67,6 @@ TODO: Evaluating synthesizer accuracy info.
 ## Improving Your System
 
 TODO: Once the system is created, there are several ways to improve it.
+
+## Reference
+
