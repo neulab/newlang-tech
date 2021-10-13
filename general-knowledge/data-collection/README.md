@@ -1,7 +1,7 @@
 # Data Collection
 
 One of the key steps for training high-quality models is to have availability of high-quality labeled data. However, often collecting such high-quality labeled data
-requires human effort which is both time-consuming and costly, even more so when human annotators are native speakers of the language of interest.
+requires human effort which is both time-consuming and costly, even more so when human annotators are not native speakers of the language of interest.
 Active learning (AL) offers methods that help train models with less human effort and cost by selecting such a subset of data that maximizes the end-model (e.g. POS model) performance.
 The key idea being that not all training samples are necessary to train a good model as some samples may offer more information than others for the end model to perform sufficiently well.
 
