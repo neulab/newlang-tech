@@ -7,9 +7,9 @@ By now you have a dataset(s) with text from which you want to select the best se
 * Easy to say by voice talent without mistakes
 * Short enough for the voice talent to be willing to say it.
 ## Install the tools
-The tools needed run on a Linux environment. If you do not have one and are using Windows OS you can install Ubuntu app and use it by following instructions on [the official documentation](https://ubuntu.com/tutorials/ubuntu-on-windows#1-overview).
+The tools require a Linux environment. If you are using Windows you can install Ubuntu app and use it by following instructions on [the official documentation](https://ubuntu.com/tutorials/ubuntu-on-windows#1-overview).
 ### Prerequisites
-After you have your Linux environment and terminal set up, do the following to install ubuntu packages:
+After you have your Linux environment set up, run the following on terminal to install ubuntu packages:
 ```
 sudo apt-get install git build-essential libncurses5-dev sox wget
 sudo apt-get install csh ffmpeg html2text
@@ -33,7 +33,7 @@ export ESTDIR=/path/build/speech_tools
 ```
 ## Run the tools
 
-Follow the steps below to obtain a set of good sentences from your dataset(s).You can have your data in one file or in many files.
+Follow the steps below to obtain a set of good sentences from your dataset(s). You can have your data in one file or in many files.
 Working files will be created in the current directory so change directories to your preferred storage location. 
 
 *Hint*: If you are using WSL(Ubuntu on Windows) you can access your Windows file system by ``\mnt\c``.
