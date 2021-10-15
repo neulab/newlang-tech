@@ -27,7 +27,7 @@ At the end of these steps, you should have your recorded speech corpus ready for
 * There should be little to no noise, a studio environment is best.
 * If you are using a mobile device, you can use an app that will save your recordings in .wav format. 
 For iOS you can use [one of these apps](https://www.iosappweekly.com/record-sound-mp3-wav-format-iphone/) for example.
-* The distance between the speaker and the microphone should be constant, so it is best to use a microphone attached to the speakers head for example using headsets or AirPods
+* The distance between the voice talent's mouth and the microphone should be constant, so it is best to use a microphone attached to the speakers head for example using headsets or AirPods
 * If you are going to record in multiple sessions, record at the same time period to avoid variations in the voice eg at 11:00 am - 12:30 pm for all your sessions.
 * The utterances should be consistent in terms of speed etc. Avoid excited speech as it has a lot of variations. 
 * If you are recording a bunch of sentences continuously in one recording, make sure the voice talent gives a hint as to which sentence they are reading such that it will be easier to process e.g. 
