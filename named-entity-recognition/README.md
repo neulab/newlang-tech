@@ -25,13 +25,8 @@ You can also create data yourself if it doesn't exist.
 
 ## Training a Named Entity Recognition System
   
-There are several NER models that can be trained, the popular ones are:
-* CNN-BiLSTM-CRF model: words are encoded using words and character embeddings, then passed into a BiLSTM model to obtain a richer representation, before using the Conditional Random Field for token classification. There are many open source tools, one of the popular ones are [NCRF++](https://github.com/jiesutd/NCRFpp). 
-
-* Fine-tuning pre-trained language models like BERT: You can use the official token classification code from [HuggingFace Transformers](https://github.com/huggingface/transformers/tree/master/examples/pytorch/token-classification). Fine-tuned LM produces the state-of-the-art for this task. For other languages apart from English, you need to use multilingual variants of the pre-trained LM e.g mBERT, XLM-RoBERTa, InfoXLM, RemBERT, etc.
-
-TODO: This should be filled in.
-
+There are several NER models that can be trained, the best approach is fine-tuning pre-trained language models like BERT: You can use the official token classification code from [HuggingFace Transformers](https://github.com/huggingface/transformers/tree/master/examples/pytorch/token-classification). Fine-tuned LM produces the state-of-the-art for this task. For other languages apart from English, you need to use multilingual variants of the pre-trained LM e.g mBERT, XLM-RoBERTa, InfoXLM, RemBERT, etc.
+  
 ## Evaluating Entity Recognition Accuracy
   
 Accuracy of NER is measured using span F1-score i.e the model is penalized if it cannot sequentially detect a span of entities e.g "New York". Just correctly identifying "York" will result in incorrect prediction of both "New" and "York". 
