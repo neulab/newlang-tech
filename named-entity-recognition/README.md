@@ -33,10 +33,8 @@ You can use the official token classification code from [HuggingFace Transformer
   
 Accuracy of NER is measured using span F1-score i.e the model is penalized if it cannot sequentially detect a span of entities e.g "New York". Just correctly identifying "York" will result in incorrect prediction of both "New" and "York". 
   
-You can use [seqeval](https://pypi.org/project/seqeval/) for computing span F1-score
+You can use [seqeval](https://pypi.org/project/seqeval/) which is a python implementation of the official [CoNLL Eval scripts](https://www.clips.uantwerpen.be/conll2000/chunking/conlleval.txt)
   
-TODO: Evaluating NER accuracy info.
-
 ## Improving on Your System
   
 Improving NER models is still a subject of research. A few effective methods are:
