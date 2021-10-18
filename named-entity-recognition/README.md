@@ -25,9 +25,11 @@ You can also create data yourself if it doesn't exist.
 
 ## Training a Named Entity Recognition System
   
-There are several NER models that can be trained, the best approach is fine-tuning pre-trained language models like BERT. 
+There are several NER models that can be trained, the best approach is fine-tuning pre-trained language models (PLMs) like BERT. 
 
-You can use the official token classification code from [HuggingFace Transformers](https://github.com/huggingface/transformers/tree/master/examples/pytorch/token-classification). Fine-tuned LM produces the state-of-the-art for this task. For other languages apart from English, you need to use multilingual variants of the pre-trained LM e.g mBERT, XLM-RoBERTa, InfoXLM, RemBERT, etc.
+You can use the official token classification code from [HuggingFace Transformers](https://github.com/huggingface/transformers/tree/master/examples/pytorch/token-classification). Fine-tuned LM produces the state-of-the-art for this task. For other languages apart from English, you need to use multilingual variants of the pre-trained LM e.g mBERT, XLM-RoBERTa, InfoXLM, RemBERT, etc. 
+  
+Please, confirm if your script is covered in the vocabulary of the PLM. If not, one idea is to perform [vocabulary augmentation](https://aclanthology.org/2020.findings-emnlp.118/) with the new script sub-word units and further pre-train the PLM on unlabelled texts in the new language. 
   
 ## Evaluating Entity Recognition Accuracy
   
@@ -39,6 +41,6 @@ You can use [seqeval](https://pypi.org/project/seqeval/) - a python implementati
   
 Improving NER models is still a subject of research. The most effective method with pre-trained language model is based on transfer learning from different task, language or domain. 
   
-* Domain/Language adaptive fine-tuning [Gururangan et al., 2020](https://arxiv.org/abs/2004.10964): involves first fine-tuning the masked language model on unlabelled texts in the target domain/language before fine-tuning on the available supervised learning dataset. For example, in the [MasakhaNER](https://arxiv.org/abs/2103.11811) paper, this helped to improve the performance by over 5% F1-score. [new domain](https://arxiv.org/abs/2004.10964). 
+* Domain/Language adaptive fine-tuning [Gururangan et al., 2020](https://arxiv.org/abs/2004.10964): involves first fine-tuning the masked language model on unlabelled texts in the target domain/language before fine-tuning on the available supervised learning dataset. For example, in the [MasakhaNER](https://arxiv.org/abs/2103.11811) paper, this helped to improve the performance by over 5% F1-score. For  
  
 * In the absence of training data or in zero-shot settings, one can train on a high resource language/domain that shares common target labels and domain. E.g Train on English CoNLL03 or WikiANN (in a similar language). 
