@@ -37,10 +37,8 @@ You can use [seqeval](https://pypi.org/project/seqeval/) - a python implementati
   
 ## Improving on Your System
   
-Improving NER models is still a subject of research. A few effective methods are:
+Improving NER models is still a subject of research. The most effective method with pre-trained language model is based on transfer learning from different task, language or domain. 
   
-* Incorporating Gazetteers e.g entity lists from Wikidata. For example [SoftGaz]() gives good result for low-resource languages. Also, entity list can be use for distant supervision combined with [noise handing](https://aclanthology.org/2020.emnlp-main.204/) or [self-training](https://dl.acm.org/doi/abs/10.1145/3394486.3403149). 
-  
-* Transfer learning - could be with language adaptive fine-tuning for [new domain](https://arxiv.org/abs/2004.10964) or [new language](https://arxiv.org/abs/2103.11811) or zero-shot transfer from high resource language/domain. 
-
-TODO: Once you have a system, how can you improve it.
+* Domain/Language adaptive fine-tuning [Gururangan et al., 2020](https://arxiv.org/abs/2004.10964): involves first fine-tuning the masked language model on unlabelled texts in the target domain/language before fine-tuning on the available supervised learning dataset. For example, in the [MasakhaNER](https://arxiv.org/abs/2103.11811) paper, this helped to improve the performance by over 5% F1-score. [new domain](https://arxiv.org/abs/2004.10964). 
+ 
+* In the absence of training data or in zero-shot settings, one can train on a high resource language/domain that shares common target labels and domain. E.g Train on English CoNLL03 or WikiANN (in a similar language). 
