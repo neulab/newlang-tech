@@ -29,7 +29,7 @@ There are several NER models that can be trained, the best approach is fine-tuni
 
 You can use the official token classification code from [HuggingFace Transformers](https://github.com/huggingface/transformers/tree/master/examples/pytorch/token-classification). Fine-tuned LM produces the state-of-the-art for this task. For other languages apart from English, you need to use multilingual variants of the pre-trained LM e.g mBERT, XLM-RoBERTa, InfoXLM, RemBERT, etc. 
   
-Please, confirm if your script is covered in the vocabulary of the PLM. If not, one idea is to perform [vocabulary augmentation](https://aclanthology.org/2020.findings-emnlp.118/) with the new script sub-word units and further pre-train the PLM on unlabelled texts in the new language. 
+Please, confirm if your script is covered in the vocabulary of the PLM. If not, one idea is to perform [vocabulary augmentation](https://aclanthology.org/2020.findings-emnlp.118/) with the new script vocabulary and further pre-train the PLM on unlabelled texts in the new language. 
   
 ## Evaluating Entity Recognition Accuracy
   
