@@ -11,7 +11,11 @@ We would like to have guides for the following tasks.
 * Full Syntactic Analysis
 * [Named Entity Recognition](named-entity-recognition/)
 * Machine Translation
-* [General Knowledge](general-knowledge/)
+
+
+We also provide some pointers to general knowledge topics such as data collection, pretraining models and so on.
+* [Data Collection](general-knowledge/data-collection)
+
 ## Contact
 
 Please contact us via the "issues" in the github repository if you want to see something new or if you have any questions. If you want to contribute you can either contact via "issues" or send a PR directly.
