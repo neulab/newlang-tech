@@ -4,6 +4,12 @@ Here is a flowchart to get you started with data collection for your language an
 
 ![Data Collection Flowchart](newlang-data.png)
 
+Link:
+[HuggingFace](https://github.com/huggingface/datasets)
+[TensorflowDatasets](https://www.tensorflow.org/datasets/api_docs/python/tfds)
+[ELRA](http://www.elra.info/en/lrec/shared-lrs/)
+[PapersWithCode](https://paperswithcode.com/area/natural-language-processing)
+
 If you are unable to find/use existing available datasets, then you need to collect data for your language/task.
 One of the key steps for training high-quality models is to have availability of high-quality labeled data.
 However, often collecting such high-quality labeled data requires human effort which is both time-consuming and costly, even more so when human annotators are not native speakers of the language of interest.
