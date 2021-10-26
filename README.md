@@ -5,7 +5,7 @@ We would like to have guides for the following tasks.
 
 * Keyboard
 * [Speech Synthesis](speech-synthesis/)
-* Speech Recognition
+* [Speech Recognition](speech-recognition/)
 * Optical Character Recognition
 * Part-of-speech, Morphological Analysis
 * Full Syntactic Analysis
