@@ -62,7 +62,9 @@ Proceed to rename your wav files with the corresponding name. Eg, the first audi
 #### b) Numbers and symbols
 If your script contains digits 0-9 and symbols like $, %, replace them with their word equivalent.
 > She gave me $200. - She gave me two hundred dollars.
+> 
 > My battery level is at 50%. - My battery level is at fifty percent
+
 If you followed the [Selecting Good Prompts](selecting-prompts.md) tutorial you probably won't have these issues.
 #### c) Acronyms
 You might have  acronyms like *USA* in your utterances.
@@ -71,16 +73,18 @@ You might want to change the text to how it is pronounced in your language. For 
 #### d) Quotation marks
 Quotation marks may appear in your direct speech sentences eg
 > ( eng_003 "She said, "Make sure you escape quotation marks!"" )
+> 
 Escape them using a backslash (\) like this:
+
 > ( eng_003 "She said, \"Make sure you escape quotation marks!\"" )
 #### e) Foreign words
 This is a hard one to solve because in some languages, normal speech will have words from other languages. Should they be pronounced to like they are in the original language or following your target languages pronunciation?
-If they appear in few sentences and you have a lot of sentences, you can ignore the sentences all together. 
+If they appear in few sentences, and you have a lot of sentences, you can ignore the sentences all together. 
 
 #### f) Variations in recorded audio
 TODO: Explain normalization step
 
-###2.  Set up your environment.
+### 2. Set up your environment.
 Set up the prerequisite libraries detailed in this section [Selecting Good Prompts](selecting-prompts.md/#install-the-tools).
 
 If you are using Linux and OSX(Macbooks), download and run [festvox_setup.sh](http://tts.speech.cs.cmu.edu/awb/11-492/homework/tts/fest_build.sh).
