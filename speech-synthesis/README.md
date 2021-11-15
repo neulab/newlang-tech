@@ -42,9 +42,9 @@ There are generally two approaches to building a speech synthesizer/Text-to-Spee
 1. Standard/traditional TTS: Uses statistical, traditional machine learning and programming techniques
 2. Neural TTS: Uses deep learning techniques
 
-We will discuss building a speech synthesizer using the standard approach.
+In this guide we will build a speech synthesizer using the standard approach.
 Specifically, we are going to build a grapheme based synthesizer as it is easier when you have limited resources. 
-For detailed explanation see the Festvox tutorial on [Grapheme-based synthesizer](http://festvox.org/bsv/c3485.html). 
+For detailed explanation, see the Festvox tutorial on [Grapheme-based synthesizer](http://festvox.org/bsv/c3485.html). 
 ### 1. Prepare your data
 If you followed step two above, you have your script file with utterances and corresponding wav files. 
 #### a) Align your utterances and wav files
@@ -85,7 +85,7 @@ If they appear in few sentences, and you have a lot of sentences, you can ignore
 TODO: Explain normalization step
 
 ### 2. Set up your environment.
-Set up the prerequisite libraries detailed in this section [Selecting Good Prompts](selecting-prompts.md/#install-the-tools).
+Set up the prerequisite libraries detailed in the prerequisites section of [Selecting Good Prompts](selecting-prompts.md/#prerequisites).
 
 If you are using Linux and OSX(Macbooks), download and run [festvox_setup.sh](http://tts.speech.cs.cmu.edu/awb/11-492/homework/tts/fest_build.sh).
 On your terminal run:
