@@ -19,7 +19,9 @@ The goal here is to create a speech corpus of aligned speech recordings and thei
  For a detailed explanation, read [this documentation](http://festvox.org/bsv/c2176.html) on how to select "good" sentences
  and follow [these instructions](https://github.com/festvox/datasets-CMU_Wilderness) from CMU Wilderness project from the *Prerequisites* to the *Make Dependencies* sections to install software needed to run the instructions on the documentation.
 3. Identify a voice talent (person whose voices are recorded and will be used to build the synthesizer) who is fluent in the language and/or domain you are working on. Details on considerations are [available here](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/record-custom-voice-samples#choose-your-voice-talent).
-4. Record the selected sentences.
+4. Get consent from your voice talent allowing you to use their voice for your intended usage and distribution purposes. 
+5. Guide available [here.](http://festvox.org/bsv/x794.html)
+6. Record the selected sentences.
 
 At the end of these steps, you should have your recorded speech corpus ready for the next step.
 
