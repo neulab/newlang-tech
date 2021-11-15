@@ -36,9 +36,62 @@ For iOS you can use [one of these apps](https://www.iosappweekly.com/record-soun
      " ... [PAUSE] sentence nine [PAUSE]  I looked for Mary and Samantha at the bus station. [PAUSE] sentence ten [PAUSE] Jacob stood on his tiptoes.[PAUSE]..... "
 * [Click here](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/record-custom-voice-samples#recording-your-script) for more tips.
 ## 3. Training a Speech Synthesizer
+There are generally two approaches to building a speech synthesizer/Text-to-Speech(TTS):
+1. Standard/traditional TTS: Uses statistical, traditional machine learning and programming techniques
+2. Neural TTS: Uses deep learning techniques
 
-
+We will discuss building a speech synthesizer using the standard approach.
+Specifically, we are going to build a grapheme based synthesizer as it is easier when you have limited resources. 
+For detailed explanation see the Festvox tutorial on [Grapheme-based synthesizer](http://festvox.org/bsv/c3485.html). 
+### 1. Prepare your data
+If you followed step two above, you have your script file with utterances and corresponding wav files. 
+#### a) Align your utterances and wav files
+The first step is to make sure that your wav files are aligned with your script.  
+Your script should be in the following format:
+> ( FILEID_0001 "text in your language ..." )
+> 
+>( FILEID_0002 "more text in your language ..." )
 TODO: This should be filled in.
+* Start each sentence with a ( and end with a ) leaving spaces between the brackets and text following/before
+* Replace `FILEID` with anything you want, eg your language code or domain, leaving no spaces in between
+* The utterance should be in quotation marks
+* Precede other quotation marks with a  backslash(/)
+
+Proceed to rename your wav files with the corresponding name. Eg, the first audio will be `FILEID_0001.wav`
+#### b) Numbers and symbols
+If your script contains digits 0-9 and symbols like $, %, replace them with their word equivalent.
+> She gave me $200. - She gave me two hundred dollars.
+> My battery level is at 50%. - My battery level is at fifty percent
+If you followed the [Selecting Good Prompts](selecting-prompts.md) tutorial you probably won't have these issues.
+#### c) Acronyms
+You might have  acronyms like *USA* in your utterances.
+You might want to change the text to how it is pronounced in your language. For example in my language I would change:
+> She travelled to USA -- She travelled to yu es eh"
+#### d) Quotation marks
+Quotation marks may appear in your direct speech sentences eg
+> ( eng_003 "She said, "Make sure you escape quotation marks!"" )
+Escape them using a backslash (\) like this:
+> ( eng_003 "She said, \"Make sure you escape quotation marks!\"" )
+#### e) Foreign words
+This is a hard one to solve because in some languages, normal speech will have words from other languages. Should they be pronounced to like they are in the original language or following your target languages pronunciation?
+If they appear in few sentences and you have a lot of sentences, you can ignore the sentences all together. 
+
+#### f) Variations in recorded audio
+TODO: Explain normalization step
+
+###2.  Set up your environment.
+Set up the prerequisite libraries detailed in this section [Selecting Good Prompts](selecting-prompts.md/#install-the-tools).
+
+If you are using Linux and OSX(Macbooks), download and run [festvox_setup.sh](http://tts.speech.cs.cmu.edu/awb/11-492/homework/tts/fest_build.sh).
+On your terminal run:
+```
+chmod +x festvox_setup.sh
+./festvox_setup.sh
+```
+
+### 3. Train your model
+TODO: Random forest  model
+
 
 ## 4. Evaluating Synthesizer Accuracy
 
