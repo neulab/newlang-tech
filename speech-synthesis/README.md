@@ -51,7 +51,6 @@ Your script should be in the following format:
 > ( FILEID_0001 "text in your language ..." )
 > 
 >( FILEID_0002 "more text in your language ..." )
-TODO: This should be filled in.
 * Start each sentence with a ( and end with a ) leaving spaces between the brackets and text following/before
 * Replace `FILEID` with anything you want, eg your language code or domain, leaving no spaces in between
 * The utterance should be in quotation marks
