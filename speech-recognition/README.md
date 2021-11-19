@@ -177,7 +177,7 @@ UTT_ID3 WAV_ID2 START_UTT3 END_UTT3
 The indexing files are supposed to be sorted in a specific order. Meanwhile, there are fix and checking scripts for the data directory. In general, you can follow the following scripts:
 ```
 export LC_ALL=C
-for x in train_phn test_phn; do
+for x in train dev test; do
   sort data/${x}/text -o data/${x}/text
   utils/fix_data_dir.sh data/${x}
   utils/validate_data_dir.sh data/${x}
@@ -239,7 +239,7 @@ Depending on the scenarios, we can further improve your system by different meth
 
 ### 5.1 Hyper-parameter tuning
 
-Hyper-parameter tuning could be a good start to improving the system. We recommend the following parameters to tune in the training config (i.e., `conf/train_asr.yaml`):
+Hyper-parameter tuning could be a good start to improve the system. We recommend the following parameters to tune in the training config (i.e., `conf/train_asr.yaml`):
 ```
 optim_conf.lr               # peak learning rate for optimizer (can be large if it is slow to converge)
 scheduler_conf.warmup_steps # warmup steps (should be smaller for small corpora)
@@ -273,3 +273,26 @@ It's also good to incorporate other resources: additional data, additional text 
 
 ## 6. Reference
 
+### 6.1 Datasets
+- Chen, G., Chai, S., Wang, G., Du, J., Zhang, W.Q., Weng, C., Su, D., Povey, D., Trmal, J., Zhang, J. and Jin, M., 2021. GigaSpeech: An Evolving, Multi-domain ASR Corpus with 10,000 Hours of Transcribed Audio. arXiv preprint arXiv:2106.06909.
+- Zhang, B., Lv, H., Guo, P., Shao, Q., Yang, C., Xie, L., Xu, X., Bu, H., Chen, X., Zeng, C. and Wu, D., 2021. WenetSpeech: A 10000+ Hours Multi-domain Mandarin Corpus for Speech Recognition. arXiv preprint arXiv:2110.03370.
+- rdila, R., Branson, M., Davis, K., Kohler, M., Meyer, J., Henretty, M., Morais, R., Saunders, L., Tyers, F. and Weber, G., 2020, May. Common Voice: A Massively-Multilingual Speech Corpus. In Proceedings of the 12th Language Resources and Evaluation Conference (pp. 4218-4222).
+- Black, A.W., 2019, May. Cmu wilderness multilingual speech dataset. In ICASSP 2019-2019 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) (pp. 5971-5975). IEEE.
+
+### 6.2 Toolkits
+- Watanabe, S., Hori, T., Karita, S., Hayashi, T., Nishitoba, J., Unno, Y., Enrique Yalta Soplin, N., Heymann, J., Wiesner, M., Chen, N., Renduchintala, A., Ochiai, T. (2018) ESPnet: End-to-End Speech Processing Toolkit. Proc. Interspeech 2018, (pp. 2207-2211)
+- Watanabe, S., Boyer, F., Chang, X., Guo, P., Hayashi, T., Higuchi, Y., Hori, T., Huang, W.C., Inaguma, H., Kamo, N. and Karita, S., 2021, June. The 2020 espnet update: new features, broadened applications, performance improvements, and future plans. In 2021 IEEE Data Science and Learning Workshop (DSLW) (pp. 1-6). IEEE.
+- Povey, D., Ghoshal, A., Boulianne, G., Burget, L., Glembek, O., Goel, N., Hannemann, M., Motlicek, P., Qian, Y., Schwarz, P. and Silovsky, J., 2011. The Kaldi speech recognition toolkit. In IEEE 2011 workshop on automatic speech recognition and understanding (No. CONF). IEEE Signal Processing Society.
+- https://github.com/wiseman/py-webrtcvad
+
+### 6.3 Methodology
+- Graves, A., Fernández, S., Gomez, F. and Schmidhuber, J., 2006, June. Connectionist temporal classification: labelling unsegmented sequence data with recurrent neural networks. In Proceedings of the 23rd international conference on Machine learning (pp. 369-376).
+- Chorowski, J., Bahdanau, D., Serdyuk, D., Cho, K. and Bengio, Y., 2015, December. Attention-based models for speech recognition. In Proceedings of the 28th International Conference on Neural Information Processing Systems-Volume 1 (pp. 577-585).
+- Watanabe, S., Hori, T., Kim, S., Hershey, J.R. and Hayashi, T., 2017. Hybrid CTC/attention architecture for end-to-end speech recognition. IEEE Journal of Selected Topics in Signal Processing, 11(8), pp.1240-1253.
+- Karita, S., Chen, N., Hayashi, T., Hori, T., Inaguma, H., Jiang, Z., Someki, M., Soplin, N.E.Y., Yamamoto, R., Wang, X. and Watanabe, S., 2019, December. A comparative study on transformer vs rnn in speech applications. In 2019 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU) (pp. 449-456). IEEE.
+- Gulati, A., Qin, J., Chiu, C.-C., Parmar, N., Zhang, Y., Yu, J., Han, W., Wang, S., Zhang, Z., Wu, Y., Pang, R. (2020) Conformer: Convolution-augmented Transformer for Speech Recognition. Proc. Interspeech 2020, (pp. 5036-5040).
+- Dong, L., Xu, S. and Xu, B., 2018, April. Speech-transformer: a no-recurrence sequence-to-sequence model for speech recognition. In 2018 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) (pp. 5884-5888). IEEE.
+- Yang, S.-w., Chi, P.-H., Chuang, Y.-S., Lai, C.-I.J., Lakhotia, K., Lin, Y.Y., Liu, A.T., Shi, J., Chang, X., Lin, G.-T., Huang, T.-H., Tseng, W.-C., Lee, K.-t., Liu, D.-R., Huang, Z., Dong, S., Li, S.-W., Watanabe, S., Mohamed, A., Lee, H.-y. (2021) SUPERB: Speech Processing Universal PERformance Benchmark. Proc. Interspeech 2021, (pp. 1194-1198).
+- Chang, X., Maekaku, T., Guo, P., Shi, J., Lu, Y.J., Subramanian, A.S., Wang, T., Yang, S.W., Tsao, Y., Lee, H.Y. and Watanabe, S., 2021. An exploration of self-supervised pretrained representations for end-to-end speech recognition. arXiv preprint arXiv:2110.04590.
+- Watanabe, S., Hori, T. and Hershey, J.R., 2017, December. Language independent end-to-end architecture for joint language identification and speech recognition. In 2017 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU) (pp. 265-271). IEEE.
+- Hou, W., Dong, Y., Zhuang, B., Yang, L., Shi, J. and Shinozaki, T., 2020. Large-Scale End-to-End Multilingual Speech Recognition and Language Identification with Multi-Task Learning. Proc. Interspeech 2020 (pp. 1037-1041).
