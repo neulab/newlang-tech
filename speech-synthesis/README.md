@@ -45,16 +45,16 @@ There are generally two approaches to building a speech synthesizer/Text-to-Spee
 In this guide we will build a speech synthesizer using the standard approach.
 Specifically, we are going to build a grapheme based synthesizer as it is easier when you have limited resources. 
 For detailed explanation, see the Festvox tutorial on [Grapheme-based synthesizer](http://festvox.org/bsv/c3485.html). 
-### 1. Prepare your data
+### 3.1 Prepare your data
 If you followed step two above, you have your script file with utterances and corresponding wav files. 
 #### a) Align your utterances and wav files
 The first step is to make sure that your wav files are aligned with your script.  
 Your script should be in the following format:
-> ( FILEID_0001 "text in your language ..." )
+> ( new_0001 "text in your language ..." )
 > 
->( FILEID_0002 "more text in your language ..." )
+>( new_0002 "more text in your language ..." )
 * Start each sentence with a ( and end with a ) leaving spaces between the brackets and text following/before
-* Replace `FILEID` with anything you want, eg your language code or domain, leaving no spaces in between
+* Replace `new` with anything you want, eg your language code or domain, leaving no spaces in between
 * The utterance should be in quotation marks
 * Precede other quotation marks with a  backslash(/)
 
@@ -87,7 +87,7 @@ Running `./bin/get_wavs recording/*.wav` in the steps that will be outlined belo
 
 After making all the necessary changes, name your script file as `txt.done.data`.
 
-### 2. Set up your environment.
+### 3.2. Set up your environment.
 Set up the prerequisite libraries detailed in the prerequisites section of [Selecting Good Prompts](selecting-prompts.md/#prerequisites).
 
 After that, download and run [festvox_setup.sh](http://tts.speech.cs.cmu.edu/awb/11-492/homework/tts/fest_build.sh).
@@ -98,7 +98,7 @@ chmod +x festvox_setup.sh
 ```
 If you are using OSX, running the script won't complete because of an error. Follow the [instructions](setup_festvox_osx.md) here to fix it.
 
-### 3. Train your model
+### 3.3 Train your model
 We will use a language called *new* and a voice talent with initials *sp* as an example.
 1. Export environment variables below by replacing path-to with the path to your `build` folder that you set up above.
 ```angular2html
@@ -114,7 +114,7 @@ cd cmu_new_sp
 $FESTVOXDIR/src/clustergen/setup_cg cmu new sp
 ```
 
-3. copy txt.done.data and audio files to your voice directory
+3. Copy txt.done.data and audio files to your voice directory
 ```
 cp -p WHATEVER/txt.done.data etc/
 cp -p WHATEVER/wav/*.wav recording/ 
@@ -150,4 +150,18 @@ MCD  mean 6.465406 std 2.540568 var 6.454484 n 125961
 Look at the mean of `MCD` row where lower is better and, the score in mcd-rf3.out should be lower than mcd-base.out. Good scores are lower than 7.
 ## 5. Improving Your System
 
-TODO: Once the system is created, there are several ways to improve it.
+Once the system is created, there are several ways to improve it. The mcd-rf3.out can help you to quickly improve it.
+1. Synthesis failed 
+
+Look at the lines in mcd-rf3.out that had failed (new_1049) or had magic numbers (new_0848) as shown below and listen to the corresponding wav file.
+```angular2html
+Warning: det <= 0. Using Prasanna's magic numbers in 3 of 1321 frames
+CG test_resynth new_0849
+
+
+CG test_resynth new_1069 Failed
+```
+   * If the voice talent didn't say the exact words in your txt.done.data file, change your txt.done.data to reflect what was spoken.
+   * If the spelling is different let's say a foreign word or abbreviations, change it to its pronunciation spelling eg `word` to `wad`. 
+2. Listen to the outputs that failed like above and others in your test file and compare with the corresponding recorded audio. If the recorded audio was really bad, you can exclude it from the wav folder in your next run.
+3. Get better quality recordings with less noise and more consistency or just more recordings.
