@@ -46,30 +46,30 @@ In this guide we will build a speech synthesizer using the standard approach.
 Specifically, we are going to build a grapheme based synthesizer as it is easier when you have limited resources. 
 For detailed explanation, see the Festvox tutorial on [Grapheme-based synthesizer](http://festvox.org/bsv/c3485.html). 
 ### 3.1 Prepare your data
-If you followed step two above, you have your script file with utterances and corresponding wav files. 
+If you followed step two above, you have your script file with textual utterances and corresponding recorded wav files. 
 #### a) Align your utterances and wav files
 The first step is to make sure that your wav files are aligned with your script.  
 Your script should be in the following format:
 > ( new_0001 "text in your language ..." )
 > 
 >( new_0002 "more text in your language ..." )
-* Start each sentence with a ( and end with a ) leaving spaces between the brackets and text following/before
-* Replace `new` with anything you want, eg your language code or domain, leaving no spaces in between
-* The utterance should be in quotation marks
-* Precede other quotation marks with a  backslash(/)
+* Start each sentence with a `(` and end with a `)` leaving spaces between the brackets and text following/before.
+* Replace `new` with anything you want, eg your language code or domain, leaving no spaces in between.
+* The utterance should be in quotation marks.
+* Precede other quotation marks with a backslash (\\).
 
-Proceed to rename your wav files with the corresponding name. Eg, the first audio will be `FILEID_0001.wav`
+Proceed to rename your wav files with the corresponding name. Eg, the first audio will be `new_0001.wav`
 #### b) Numbers and symbols
 If your script contains digits 0-9 and symbols like $, %, replace them with their word equivalent.
 > She gave me $200. - She gave me two hundred dollars.
 > 
 > My battery level is at 50%. - My battery level is at fifty percent
 
-If you followed the [Selecting Good Prompts](selecting-prompts.md) tutorial you probably won't have these issues.
+If you followed the [Selecting Good Prompts](selecting-prompts.md) guide you probably won't have these issues.
 #### c) Acronyms
 You might have  acronyms like *USA* in your utterances.
 You might want to change the text to how it is pronounced in your language. For example in my language I would change:
-> She travelled to USA -- She travelled to yu es e"
+> She travelled to USA -- She travelled to YU ES E"
 #### d) Quotation marks
 Quotation marks may appear in your direct speech sentences eg
 > ( eng_003 "She said, "Make sure you escape quotation marks!"" )
@@ -78,12 +78,11 @@ Escape them using a backslash (\) like this:
 
 > ( eng_003 "She said, \"Make sure you escape quotation marks!\"" )
 #### e) Foreign words
-This is a hard one to solve because in some languages, normal speech will have words from other languages. Should they be pronounced to like they are in the original language or following your target languages pronunciation?
-If they appear in few sentences, and you have a lot of sentences, you can ignore the sentences all together. 
+In some languages, normal speech will have words from other languages. During recording, the challenge is whether to pronounce them like they are in the language of origin or following your target language's pronunciation. Either way, change the script to reflect how it was pronounced by the voice talent, eg "word" to "wad".
 
 #### f) Variations in recorded audio
-When your recordings were done in different sessions and different mics, there most likely will be variations in the volume and other characteristics of the audio. You need to power normalize the recordings to reduce that.
-Running `./bin/get_wavs recording/*.wav` in the steps that will be outlined below will do that for you.
+When your recordings were done in different sessions and/or different microphones or microphone distance, there most likely will be variations in the volume and other characteristics of the audio. You need to power normalize the recordings to reduce their effect.
+Running `./bin/get_wavs recording/*.wav` as part of the steps that will be outlined below will do that for you.
 
 After making all the necessary changes, name your script file as `txt.done.data`.
 
@@ -100,7 +99,7 @@ If you are using OSX, running the script won't complete because of an error. Fol
 
 ### 3.3 Train your model
 We will use a language called *new* and a voice talent with initials *sp* as an example.
-1. Export environment variables below by replacing path-to with the path to your `build` folder that you set up above.
+1. Export environment variables below by replacing PATH-TO with the location of the `build` folder that you set up above.
 ```angular2html
 export ESTDIR=PATH-TO/build/speech_tools
 export FESTVOXDIR=PATH-TO/build/festvox
@@ -125,7 +124,7 @@ cp -p WHATEVER/wav/*.wav recording/
 ./bin/prune_silence wav/*.wav
 ./bin/prune_middle_silences wav/*.wav
 ```
-5. build voice templates
+5. Build voice templates
 ```
 $FESTVOXDIR/src/grapheme/make_cg_grapheme
 ```
@@ -137,23 +136,21 @@ nohup ./bin/build_cg_rfs_voice &
 ```
 ## 4. Evaluating Synthesizer Accuracy
 When the building process is complete, you will have a test directory in your voice directory. 
-Your synthesized voices can be found in tts_rf3 inside test directory.
+Your synthesized voices can be found in `test/tts_rf3` directory.
 
 To check the performance of the model, look at two files;
-`mcd-base.out` and `mcd-rf3.out`. The last four lines in these files contains the metrics, see example below. 
+`mcd-base.out` and `mcd-rf3.out`. The last four lines in these files contain the metrics, see example below. 
 ```
 all  mean 4.779275 std 307.545312 var 94584.118855 n 3149025
 F0   mean 17.620242 std 16.647217 var 277.129829 n 125961
 noF0 mean 0.230314 std 0.453159 var 0.205354 n 3023064
 MCD  mean 6.465406 std 2.540568 var 6.454484 n 125961
 ```
-Look at the mean of `MCD` row where lower is better and, the score in mcd-rf3.out should be lower than mcd-base.out. Good scores are lower than 7.
+Check the mean of `MCD` row (lower is better). The score in mcd-rf3.out should be lower than mcd-base.out and decent scores are lower than 7. Means lower than 6 are good and you should aim at getting there.
 ## 5. Improving Your System
 
-Once the system is created, there are several ways to improve it. The mcd-rf3.out can help you to quickly improve it.
-1. Synthesis failed 
-
-Look at the lines in mcd-rf3.out that had failed (new_1049) or had magic numbers (new_0848) as shown below and listen to the corresponding wav file.
+Once the system is created, there are several ways to improve it.
+1. Look at the lines in `mcd-rf3.out` file that had failed (new_1049) or had magic numbers used (new_0849) as shown below and listen to the corresponding wav file.
 ```angular2html
 Warning: det <= 0. Using Prasanna's magic numbers in 3 of 1321 frames
 CG test_resynth new_0849
@@ -165,3 +162,6 @@ CG test_resynth new_1069 Failed
    * If the spelling is different let's say a foreign word or abbreviations, change it to its pronunciation spelling eg `word` to `wad`. 
 2. Listen to the outputs that failed like above and others in your test file and compare with the corresponding recorded audio. If the recorded audio was really bad, you can exclude it from the wav folder in your next run.
 3. Get better quality recordings with less noise and more consistency or just more recordings.
+
+## 6. Using and Porting your System to a Device
+TODO : How to use flite for Android
