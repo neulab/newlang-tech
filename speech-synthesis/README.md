@@ -69,7 +69,7 @@ If you followed the [Selecting Good Prompts](selecting-prompts.md) tutorial you 
 #### c) Acronyms
 You might have  acronyms like *USA* in your utterances.
 You might want to change the text to how it is pronounced in your language. For example in my language I would change:
-> She travelled to USA -- She travelled to yu es eh"
+> She travelled to USA -- She travelled to yu es e"
 #### d) Quotation marks
 Quotation marks may appear in your direct speech sentences eg
 > ( eng_003 "She said, "Make sure you escape quotation marks!"" )
@@ -82,26 +82,72 @@ This is a hard one to solve because in some languages, normal speech will have w
 If they appear in few sentences, and you have a lot of sentences, you can ignore the sentences all together. 
 
 #### f) Variations in recorded audio
-TODO: Explain normalization step
+When your recordings were done in different sessions and different mics, there most likely will be variations in the volume and other characteristics of the audio. You need to power normalize the recordings to reduce that.
+Running `./bin/get_wavs recording/*.wav` in the steps that will be outlined below will do that for you.
+
+After making all the necessary changes, name your script file as `txt.done.data`.
 
 ### 2. Set up your environment.
 Set up the prerequisite libraries detailed in the prerequisites section of [Selecting Good Prompts](selecting-prompts.md/#prerequisites).
 
-If you are using Linux and OSX(Macbooks), download and run [festvox_setup.sh](http://tts.speech.cs.cmu.edu/awb/11-492/homework/tts/fest_build.sh).
+After that, download and run [festvox_setup.sh](http://tts.speech.cs.cmu.edu/awb/11-492/homework/tts/fest_build.sh).
 On your terminal run:
 ```
 chmod +x festvox_setup.sh
 ./festvox_setup.sh
 ```
+If you are using OSX, running the script won't complete because of an error. Follow the [instructions](setup_festvox_osx.md) here to fix it.
 
 ### 3. Train your model
-TODO: Random forest  model
+We will use a language called *new* and a voice talent with initials *sp* as an example.
+1. Export environment variables below by replacing path-to with the path to your `build` folder that you set up above.
+```angular2html
+export ESTDIR=PATH-TO/build/speech_tools
+export FESTVOXDIR=PATH-TO/build/festvox
+export SPTKDIR=/PATH-TO/build/SPTK
+export FLITEDIR=/PATH-TO/build/flite
+```
+2. Setup voice directory
+```angular2html
+mkdir cmu_new_sp
+cd cmu_new_sp
+$FESTVOXDIR/src/clustergen/setup_cg cmu new sp
+```
 
+3. copy txt.done.data and audio files to your voice directory
+```
+cp -p WHATEVER/txt.done.data etc/
+cp -p WHATEVER/wav/*.wav recording/ 
+ ```
+4. Power normalize and prune silences
+```angular2html
+./bin/get_wavs recording/*.wav
+./bin/prune_silence wav/*.wav
+./bin/prune_middle_silences wav/*.wav
+```
+5. build voice templates
+```
+$FESTVOXDIR/src/grapheme/make_cg_grapheme
+```
+6. Build a random forest based voice model 
 
+This process consumes a lot of memory, make sure you have enough and can take around 15 hrs depending on the size of your prompt list.
+```angular2html
+nohup ./bin/build_cg_rfs_voice &
+```
 ## 4. Evaluating Synthesizer Accuracy
+When the building process is complete, you will have a test directory in your voice directory. 
+Your synthesized voices can be found in tts_rf3 inside test directory.
 
-TODO: Evaluating synthesizer accuracy info.
-
+To check the performance of the model, look at two files;
+`mcd-base.out` and `mcd-rf3.out`. The last four lines in these files contains the metrics, see example below. 
+```
+all  mean 4.779275 std 307.545312 var 94584.118855 n 3149025
+F0   mean 17.620242 std 16.647217 var 277.129829 n 125961
+noF0 mean 0.230314 std 0.453159 var 0.205354 n 3023064
+MCD  mean 6.465406 std 2.540568 var 6.454484 n 125961
+```
+Look at the mean of `MCD` row where lower is better and, the score in mcd-rf3.out should be lower than mcd-base.out. Good scores are lower than 7.
 ## 5. Improving Your System
 
 TODO: Once the system is created, there are several ways to improve it.
