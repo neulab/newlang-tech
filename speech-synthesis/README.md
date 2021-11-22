@@ -54,8 +54,8 @@ Your script should be in the following format:
 > 
 >( new_0002 "more text in your language ..." )
 * Start each sentence with a `(` and end with a `)` leaving spaces between the brackets and text following/before.
-* Replace `new` with anything you want, eg your language code or domain, leaving no spaces in between.
-* The utterance should be in quotation marks.
+* Replace `new` with anything you want, eg your language code or domain, leaving no spaces in between your *new* and numbers.
+* The utterance should be inside quotation marks.
 * Precede other quotation marks with a backslash (\\).
 
 Proceed to rename your wav files with the corresponding name. Eg, the first audio will be `new_0001.wav`
@@ -74,9 +74,9 @@ You might want to change the text to how it is pronounced in your language. For 
 Quotation marks may appear in your direct speech sentences eg
 > ( eng_003 "She said, "Make sure you escape quotation marks!"" )
 > 
-Escape them using a backslash (\) like this:
+Escape them using a backslash (\\) like this:
 
-> ( eng_003 "She said, \"Make sure you escape quotation marks!\"" )
+> ( eng_003 "She said, \"Make sure you escape quotation marks!\\"" )
 #### e) Foreign words
 In some languages, normal speech will have words from other languages. During recording, the challenge is whether to pronounce them like they are in the language of origin or following your target language's pronunciation. Either way, change the script to reflect how it was pronounced by the voice talent, eg "word" to "wad".
 
@@ -158,8 +158,8 @@ CG test_resynth new_0849
 
 CG test_resynth new_1069 Failed
 ```
-   * If the voice talent didn't say the exact words in your txt.done.data file, change your txt.done.data to reflect what was spoken.
-   * If the spelling is different let's say a foreign word or abbreviations, change it to its pronunciation spelling eg `word` to `wad`. 
+  * If the voice talent didn't say the exact words in your txt.done.data file, change your txt.done.data to reflect what was spoken.
+  * If the spelling is different let's say a foreign word or abbreviations, change it to its pronunciation spelling eg `word` to `wad`. 
 2. Listen to the outputs that failed like above and others in your test file and compare with the corresponding recorded audio. If the recorded audio was really bad, you can exclude it from the wav folder in your next run.
 3. Get better quality recordings with less noise and more consistency or just more recordings.
 
