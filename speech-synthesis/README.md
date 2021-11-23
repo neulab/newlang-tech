@@ -1,4 +1,4 @@
-# Building Speech Synthesis for New Languages
+# Building A Speech Synthesizer for New Languages
 
 Speech synthesis is the task of generating speech from text. It is useful if you want to build a speech interface.
 For a speech synthesizer, voice recordings from one person is usually required for consistency and natural sounding output.
