@@ -1,4 +1,4 @@
-# Building Speech Synthesis for New Languages
+# Building A Speech Synthesizer for New Languages
 
 Speech synthesis is the task of generating speech from text. It is useful if you want to build a speech interface.
 For a speech synthesizer, voice recordings from one person is usually required for consistency and natural sounding output.
@@ -19,7 +19,8 @@ The goal here is to create a speech corpus of aligned speech recordings and thei
  For a detailed explanation, read [this documentation](http://festvox.org/bsv/c2176.html) on how to select "good" sentences
  and follow [these instructions](https://github.com/festvox/datasets-CMU_Wilderness) from CMU Wilderness project from the *Prerequisites* to the *Make Dependencies* sections to install software needed to run the instructions on the documentation.
 3. Identify a voice talent (person whose voices are recorded and will be used to build the synthesizer) who is fluent in the language and/or domain you are working on. Details on considerations are [available here](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/record-custom-voice-samples#choose-your-voice-talent).
-4. Record the selected sentences.
+4. Get consent from your voice talent allowing you to use their voice for your intended usage and distribution purposes. A detailed explanation on who owns a voice can be found [here.](http://festvox.org/bsv/x794.html)
+6. Record the selected sentences.
 
 At the end of these steps, you should have your recorded speech corpus ready for the next step.
 
@@ -36,14 +37,130 @@ For iOS you can use [one of these apps](https://www.iosappweekly.com/record-soun
      " ... [PAUSE] sentence nine [PAUSE]  I looked for Mary and Samantha at the bus station. [PAUSE] sentence ten [PAUSE] Jacob stood on his tiptoes.[PAUSE]..... "
 * [Click here](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/record-custom-voice-samples#recording-your-script) for more tips.
 ## 3. Training a Speech Synthesizer
+There are generally two approaches to building a speech synthesizer/Text-to-Speech(TTS):
+1. Standard/traditional TTS: Uses statistical, traditional machine learning and programming techniques
+2. Neural TTS: Uses deep learning techniques
 
+In this guide we will build a speech synthesizer using the standard approach.
+Specifically, we are going to build a grapheme based synthesizer as it is easier when you have limited resources. 
+For detailed explanation, see the Festvox tutorial on [Grapheme-based synthesizer](http://festvox.org/bsv/c3485.html). 
+### 3.1 Prepare your data
+If you followed step two above, you have your script file with textual utterances and corresponding recorded wav files. 
+#### a) Align your utterances and wav files
+The first step is to make sure that your wav files are aligned with your script.  
+Your script should be in the following format:
+> ( new_0001 "text in your language ..." )
+> 
+>( new_0002 "more text in your language ..." )
+* Start each sentence with a `(` and end with a `)` leaving spaces between the brackets and text following/before.
+* Replace `new` with anything you want, eg your language code or domain, leaving no spaces in between your *new* and numbers.
+* The utterance should be inside quotation marks.
+* Precede other quotation marks with a backslash (\\).
 
-TODO: This should be filled in.
+Proceed to rename your wav files with the corresponding name. Eg, the first audio will be `new_0001.wav`
+#### b) Numbers and symbols
+If your script contains digits 0-9 and symbols like $, %, replace them with their word equivalent.
+> She gave me $200. - She gave me two hundred dollars.
+> 
+> My battery level is at 50%. - My battery level is at fifty percent
 
+If you followed the [Selecting Good Prompts](selecting-prompts.md) guide you probably won't have these issues.
+#### c) Acronyms
+You might have  acronyms like *USA* in your utterances.
+You might want to change the text to how it is pronounced in your language. For example in my language I would change:
+> She travelled to USA -- She travelled to YU ES E"
+#### d) Quotation marks
+Quotation marks may appear in your direct speech sentences eg
+> ( eng_003 "She said, "Make sure you escape quotation marks!"" )
+> 
+Escape them using a backslash (\\) like this:
+
+> ( eng_003 "She said, \"Make sure you escape quotation marks!\\"" )
+#### e) Foreign words
+In some languages, normal speech will have words from other languages. During recording, the challenge is whether to pronounce them like they are in the language of origin or following your target language's pronunciation. Either way, change the script to reflect how it was pronounced by the voice talent, eg "word" to "wad".
+
+#### f) Variations in recorded audio
+When your recordings were done in different sessions and/or different microphones or microphone distance, there most likely will be variations in the volume and other characteristics of the audio. You need to power normalize the recordings to reduce their effect.
+Running `./bin/get_wavs recording/*.wav` as part of the steps that will be outlined below will do that for you.
+
+After making all the necessary changes, name your script file as `txt.done.data`.
+
+### 3.2. Set up your environment.
+Set up the prerequisite libraries detailed in the prerequisites section of [Selecting Good Prompts](selecting-prompts.md/#prerequisites).
+
+After that, download and run [festvox_setup.sh](http://tts.speech.cs.cmu.edu/awb/11-492/homework/tts/fest_build.sh).
+On your terminal run:
+```
+chmod +x festvox_setup.sh
+./festvox_setup.sh
+```
+If you are using OSX, running the script won't complete because of an error. Follow the [instructions](setup_festvox_osx.md) here to fix it.
+
+### 3.3 Train your model
+We will use a language called *new* and a voice talent with initials *sp* as an example.
+1. Export environment variables below by replacing PATH-TO with the location of the `build` folder that you set up above.
+```angular2html
+export ESTDIR=PATH-TO/build/speech_tools
+export FESTVOXDIR=PATH-TO/build/festvox
+export SPTKDIR=/PATH-TO/build/SPTK
+export FLITEDIR=/PATH-TO/build/flite
+```
+2. Setup voice directory
+```angular2html
+mkdir cmu_new_sp
+cd cmu_new_sp
+$FESTVOXDIR/src/clustergen/setup_cg cmu new sp
+```
+
+3. Copy txt.done.data and audio files to your voice directory
+```
+cp -p WHATEVER/txt.done.data etc/
+cp -p WHATEVER/wav/*.wav recording/ 
+ ```
+4. Power normalize and prune silences
+```angular2html
+./bin/get_wavs recording/*.wav
+./bin/prune_silence wav/*.wav
+./bin/prune_middle_silences wav/*.wav
+```
+5. Build voice templates
+```
+$FESTVOXDIR/src/grapheme/make_cg_grapheme
+```
+6. Build a random forest based voice model 
+
+This process consumes a lot of memory, make sure you have enough and can take around 15 hrs depending on the size of your prompt list.
+```angular2html
+nohup ./bin/build_cg_rfs_voice &
+```
 ## 4. Evaluating Synthesizer Accuracy
+When the building process is complete, you will have a test directory in your voice directory. 
+Your synthesized voices can be found in `test/tts_rf3` directory.
 
-TODO: Evaluating synthesizer accuracy info.
-
+To check the performance of the model, look at two files;
+`mcd-base.out` and `mcd-rf3.out`. The last four lines in these files contain the metrics, see example below. 
+```
+all  mean 4.779275 std 307.545312 var 94584.118855 n 3149025
+F0   mean 17.620242 std 16.647217 var 277.129829 n 125961
+noF0 mean 0.230314 std 0.453159 var 0.205354 n 3023064
+MCD  mean 6.465406 std 2.540568 var 6.454484 n 125961
+```
+Check the mean of `MCD` row (lower is better). The score in mcd-rf3.out should be lower than mcd-base.out and decent scores are lower than 7. Means lower than 6 are good and you should aim at getting there.
 ## 5. Improving Your System
 
-TODO: Once the system is created, there are several ways to improve it.
+Once the system is created, there are several ways to improve it.
+1. Look at the lines in `mcd-rf3.out` where magic numbers were used (new_0849) or that had failed (new_1049) as shown below and listen to the corresponding wav files.
+```angular2html
+Warning: det <= 0. Using Prasanna's magic numbers in 3 of 1321 frames
+CG test_resynth new_0849
+
+
+CG test_resynth new_1069 Failed
+```
+  * If the voice talent didn't say the exact words in your txt.done.data file, change your txt.done.data to reflect what was spoken.
+  * If the spelling is different let's say a foreign word or abbreviations, change it to its pronunciation spelling eg `word` to `wad`. 
+2. Listen to the outputs that failed like above and others in your test file and compare with the corresponding recorded audio. If the recorded audio was really bad, you can exclude it from the wav folder in your next run.
+3. Get better quality recordings with less noise and more consistency or just more recordings if possible.
+
+## 6. Using and Porting your System to a Device
+TODO : How to use flite for Android
