@@ -19,8 +19,7 @@ The goal here is to create a speech corpus of aligned speech recordings and thei
  For a detailed explanation, read [this documentation](http://festvox.org/bsv/c2176.html) on how to select "good" sentences
  and follow [these instructions](https://github.com/festvox/datasets-CMU_Wilderness) from CMU Wilderness project from the *Prerequisites* to the *Make Dependencies* sections to install software needed to run the instructions on the documentation.
 3. Identify a voice talent (person whose voices are recorded and will be used to build the synthesizer) who is fluent in the language and/or domain you are working on. Details on considerations are [available here](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/record-custom-voice-samples#choose-your-voice-talent).
-4. Get consent from your voice talent allowing you to use their voice for your intended usage and distribution purposes. 
-5. Guide available [here.](http://festvox.org/bsv/x794.html)
+4. Get consent from your voice talent allowing you to use their voice for your intended usage and distribution purposes. A detailed explanation on who owns a voice can be found [here.](http://festvox.org/bsv/x794.html)
 6. Record the selected sentences.
 
 At the end of these steps, you should have your recorded speech corpus ready for the next step.
@@ -150,7 +149,7 @@ Check the mean of `MCD` row (lower is better). The score in mcd-rf3.out should b
 ## 5. Improving Your System
 
 Once the system is created, there are several ways to improve it.
-1. Look at the lines in `mcd-rf3.out` file that had failed (new_1049) or had magic numbers used (new_0849) as shown below and listen to the corresponding wav file.
+1. Look at the lines in `mcd-rf3.out` where magic numbers were used (new_0849) or that had failed (new_1049) as shown below and listen to the corresponding wav files.
 ```angular2html
 Warning: det <= 0. Using Prasanna's magic numbers in 3 of 1321 frames
 CG test_resynth new_0849
@@ -161,7 +160,7 @@ CG test_resynth new_1069 Failed
   * If the voice talent didn't say the exact words in your txt.done.data file, change your txt.done.data to reflect what was spoken.
   * If the spelling is different let's say a foreign word or abbreviations, change it to its pronunciation spelling eg `word` to `wad`. 
 2. Listen to the outputs that failed like above and others in your test file and compare with the corresponding recorded audio. If the recorded audio was really bad, you can exclude it from the wav folder in your next run.
-3. Get better quality recordings with less noise and more consistency or just more recordings.
+3. Get better quality recordings with less noise and more consistency or just more recordings if possible.
 
 ## 6. Using and Porting your System to a Device
 TODO : How to use flite for Android
