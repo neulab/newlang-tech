@@ -1,6 +1,6 @@
 # Building A Speech Synthesizer for New Languages
 
-Speech synthesis is the task of generating speech from text. It is useful if you want to build a speech interface.
+Speech synthesis (Text-to-Speech) is the task of generating speech from text. It is useful if you want to build a speech interface.
 For a speech synthesizer, voice recordings from one person is usually required for consistency and natural sounding output.
 
 ## 1. Collecting Data
@@ -37,7 +37,7 @@ For iOS you can use [one of these apps](https://www.iosappweekly.com/record-soun
      " ... [PAUSE] sentence nine [PAUSE]  I looked for Mary and Samantha at the bus station. [PAUSE] sentence ten [PAUSE] Jacob stood on his tiptoes.[PAUSE]..... "
 * [Click here](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/record-custom-voice-samples#recording-your-script) for more tips.
 ## 3. Training a Speech Synthesizer
-There are generally two approaches to building a speech synthesizer/Text-to-Speech(TTS):
+There are generally two approaches to building a speech synthesizer/Text-to-Speech (TTS):
 1. Standard/traditional TTS: Uses statistical, traditional machine learning and programming techniques
 2. Neural TTS: Uses deep learning techniques
 
@@ -105,30 +105,30 @@ export FESTVOXDIR=PATH-TO/build/festvox
 export SPTKDIR=/PATH-TO/build/SPTK
 export FLITEDIR=/PATH-TO/build/flite
 ```
-2. Setup voice directory
-This is where you will be building your voice from. Use the three letter representation of your language(new) and speaker(spk) to name it.
+2. Setup voice directory.
+This is where you will be building your voice from. Use the three letter representation of your language (new) and speaker (spk) to name it.
 ```angular2html
 mkdir cmu_new_spk
 cd cmu_new_spk
 $FESTVOXDIR/src/clustergen/setup_cg cmu new spk
 ```
 
-3. Copy txt.done.data and audio files to your voice directory
+3. Copy `txt.done.data` and audio files to your voice directory.
 ```
 cp -p WHATEVER/txt.done.data etc/
 cp -p WHATEVER/wav/*.wav recording/ 
  ```
-4. Power normalize and prune silences
+4. Power normalize and prune silences.
 ```angular2html
 ./bin/get_wavs recording/*.wav
 ./bin/prune_silence wav/*.wav
 ./bin/prune_middle_silences wav/*.wav
 ```
-5. Build voice templates
+5. Build voice templates.
 ```
 $FESTVOXDIR/src/grapheme/make_cg_grapheme
 ```
-6. Build a random forest based voice model 
+6. Build a random forest based voice model.
 
 This process consumes a lot of memory, make sure you have enough and can take around 15 hrs depending on the size of your prompt list.
 ```angular2html
@@ -167,14 +167,14 @@ Utterances at the end of this file though are somehow bad (mismatch between what
 * Spelling errors. Eg for my example language `ng'` and `ng` represent different sounds so if the apostrophe was left out in txt.done.data there will be a mismatch.
 * Some words were overstressed, lengthened or slowed down than normal eg in excited speech.
 * Pauses which are too long or short/inconsistent.
-* Bad quality recording with noise
+* Bad quality recording with noise.
 
 **Solutions**
 
 * In the case of mismatch or pruned audio, change your txt.done.data to reflect what was in the corresponding recording.
 * Correct spelling errors in txt.done.data.
-* For foreign words or abbreviations, change them to their pronunciation spelling eg `word` to `wad`. 
-* If the recording was really bad, you can exclude it from `txt.done.data` in your next run.
+* For foreign words or abbreviations, change them to their pronunciation spelling eg *word* to *wad*. 
+* If the recording was awful, you can exclude it from `txt.done.data` in your next run.
 * Get better quality recordings with less noise and more consistency if possible .
 
 Repeat the training process after making these changes to improve your synthesizer.
