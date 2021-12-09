@@ -76,7 +76,7 @@ Quotation marks may appear in your direct speech sentences eg
 > 
 Escape them using a backslash (\) like this:
 
-> ( eng_003 "She said, \"Make sure you escape quotation marks!\"" )
+> ( eng_003 "She said, \"Make sure you escape quotation marks!\\"" )
 #### e) Foreign words
 In some languages, normal speech will have words from other languages. During recording, the challenge is whether to pronounce them like they are in the language of origin or following your target language's pronunciation. Either way, change the script to reflect how it was pronounced by the voice talent, eg "word" to "wad".
 
@@ -98,7 +98,7 @@ chmod +x festvox_setup.sh
 If you are using OSX, running the script won't complete because of an error. Follow the [instructions](setup_festvox_osx.md) here to fix it.
 
 ### 3.3 Train your model
-We will use a language called *new* and a voice talent with initials *sp* as an example.
+We will use a language called *new* and a voice talent with initials *spk* for this demo.
 1. Export environment variables below by replacing PATH-TO with the location of the `build` folder that you set up above.
 ```angular2html
 export ESTDIR=PATH-TO/build/speech_tools
@@ -107,10 +107,11 @@ export SPTKDIR=/PATH-TO/build/SPTK
 export FLITEDIR=/PATH-TO/build/flite
 ```
 2. Setup voice directory
+This is where you will be building your voice from. Use the three letter representation of your language(new) and speaker(spk) to name it.
 ```angular2html
-mkdir cmu_new_sp
-cd cmu_new_sp
-$FESTVOXDIR/src/clustergen/setup_cg cmu new sp
+mkdir cmu_new_spk
+cd cmu_new_spk
+$FESTVOXDIR/src/clustergen/setup_cg cmu new spk
 ```
 
 3. Copy txt.done.data and audio files to your voice directory
@@ -146,22 +147,37 @@ F0   mean 17.620242 std 16.647217 var 277.129829 n 125961
 noF0 mean 0.230314 std 0.453159 var 0.205354 n 3023064
 MCD  mean 6.465406 std 2.540568 var 6.454484 n 125961
 ```
-Check the mean of `MCD` row (lower is better). The score in mcd-rf3.out should be lower than mcd-base.out and decent scores are lower than 7. Means lower than 6 are good and you should aim at getting there.
+Check the mean of `MCD` row (lower is better). The score in mcd-rf3.out should be lower than mcd-base.out and decent scores are lower than 7. MCD means lower than 6 are good and you should aim at getting there.
 ## 5. Improving Your System
 
-Once the system is created, there are several ways to improve it.
-1. Look at the lines in `mcd-rf3.out` file that had failed (new_1049) or had magic numbers used (new_0849) as shown below and listen to the corresponding wav file.
-```angular2html
-Warning: det <= 0. Using Prasanna's magic numbers in 3 of 1321 frames
-CG test_resynth new_0849
+Once the system is created, there are several ways to improve it. A major cause of bad scores is mismatch between your prompts and the audio recordings.
 
-
-CG test_resynth new_1069 Failed
+To identify which utterances might be causing the low score, synthesise all the prompts in your `txt.done.data` and generate MCD scores for each of them. 
+Run:
 ```
-   * If the voice talent didn't say the exact words in your txt.done.data file, change your txt.done.data to reflect what was spoken.
-   * If the spelling is different let's say a foreign word or abbreviations, change it to its pronunciation spelling eg `word` to `wad`. 
-2. Listen to the outputs that failed like above and others in your test file and compare with the corresponding recorded audio. If the recorded audio was really bad, you can exclude it from the wav folder in your next run.
-3. Get better quality recordings with less noise and more consistency or just more recordings.
+ nohup ./bin/do_clustergen parallel utt_by_utt etc/txt.done.data
+ nohup ./bin/do_clustergen utt_by_utt_score etc/txt.done.data
+```
+The commands above will create a list of your text ordered from good to bad in `etc/txt.done.data.ordered`. 
+The last number before *)* in each line is the MCD score for that utterance. 
+The MCD score is not absolute as shorter utterances tend to have lower MCDs.  
+  
+Utterances at the end of this file though are somehow bad (mismatch between what was spoken and what is in the .wav file). It can be hard to identify why but here are things to lookout for:
+* Some words weren't spoken, were inserted or substituted by another word. This is especially common for contractions(going to/gonna), words with alternative pronunciations and rare words where the speaker will replace them with a common word. 
+* The recording was cut abruptly (at the end or the beginning). This may happen during recording, file transfer or conversion to `wav` format. 
+* Spelling errors. Eg for my example language `ng'` and `ng` represent different sounds so if the apostrophe was left out in txt.done.data there will be a mismatch.
+* Some words were overstressed, lengthened or slowed down than normal eg in excited speech.
+* Pauses which are too long or short/inconsistent.
+* Bad quality recording with noise
 
+**Solutions**
+
+* In the case of mismatch or pruned audio, change your txt.done.data to reflect what was in the corresponding recording.
+* Correct spelling errors in txt.done.data.
+* For foreign words or abbreviations, change them to their pronunciation spelling eg `word` to `wad`. 
+* If the recording was really bad, you can exclude it from `txt.done.data` in your next run.
+* Get better quality recordings with less noise and more consistency if possible .
+
+Repeat the training process after making these changes to improve your synthesizer.
 ## 6. Using and Porting your System to a Device
 TODO : How to use flite for Android
