@@ -1,4 +1,4 @@
-# Building Speech Synthesis for New Languages
+# Building A Speech Synthesizer for New Languages
 
 Speech synthesis is the task of generating speech from text. It is useful if you want to build a speech interface.
 For a speech synthesizer, voice recordings from one person is usually required for consistency and natural sounding output.
@@ -19,8 +19,7 @@ The goal here is to create a speech corpus of aligned speech recordings and thei
  For a detailed explanation, read [this documentation](http://festvox.org/bsv/c2176.html) on how to select "good" sentences
  and follow [these instructions](https://github.com/festvox/datasets-CMU_Wilderness) from CMU Wilderness project from the *Prerequisites* to the *Make Dependencies* sections to install software needed to run the instructions on the documentation.
 3. Identify a voice talent (person whose voices are recorded and will be used to build the synthesizer) who is fluent in the language and/or domain you are working on. Details on considerations are [available here](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/record-custom-voice-samples#choose-your-voice-talent).
-4. Get consent from your voice talent allowing you to use their voice for your intended usage and distribution purposes. 
-5. Guide available [here.](http://festvox.org/bsv/x794.html)
+4. Get consent from your voice talent allowing you to use their voice for your intended usage and distribution purposes. A detailed explanation on who owns a voice can be found [here.](http://festvox.org/bsv/x794.html)
 6. Record the selected sentences.
 
 At the end of these steps, you should have your recorded speech corpus ready for the next step.
@@ -54,8 +53,8 @@ Your script should be in the following format:
 > 
 >( new_0002 "more text in your language ..." )
 * Start each sentence with a `(` and end with a `)` leaving spaces between the brackets and text following/before.
-* Replace `new` with anything you want, eg your language code or domain, leaving no spaces in between.
-* The utterance should be in quotation marks.
+* Replace `new` with anything you want, eg your language code or domain, leaving no spaces in between your *new* and numbers.
+* The utterance should be inside quotation marks.
 * Precede other quotation marks with a backslash (\\).
 
 Proceed to rename your wav files with the corresponding name. Eg, the first audio will be `new_0001.wav`
@@ -74,7 +73,7 @@ You might want to change the text to how it is pronounced in your language. For 
 Quotation marks may appear in your direct speech sentences eg
 > ( eng_003 "She said, "Make sure you escape quotation marks!"" )
 > 
-Escape them using a backslash (\) like this:
+Escape them using a backslash (\\) like this:
 
 > ( eng_003 "She said, \"Make sure you escape quotation marks!\\"" )
 #### e) Foreign words
