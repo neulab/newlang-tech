@@ -36,6 +36,8 @@ For iOS you can use [one of these apps](https://www.iosappweekly.com/record-soun
  
      " ... [PAUSE] sentence nine [PAUSE]  I looked for Mary and Samantha at the bus station. [PAUSE] sentence ten [PAUSE] Jacob stood on his tiptoes.[PAUSE]..... "
 * [Click here](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/record-custom-voice-samples#recording-your-script) for more tips.
+
+* You can use the [Lig-Aikuma](https://lig-aikuma.imag.fr/) app to record the speech corpus without using internet connection.  Read the paper describing its usage [here](https://www.sciencedirect.com/science/article/pii/S1877050916300448).
 ## 3. Training a Speech Synthesizer
 There are generally two approaches to building a speech synthesizer/Text-to-Speech (TTS):
 1. Standard/traditional TTS: Uses statistical, traditional machine learning and programming techniques
