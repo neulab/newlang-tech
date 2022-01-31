@@ -6,7 +6,7 @@ We would like to have guides for the following tasks.
 * Keyboard
 * [Speech Synthesis](speech-synthesis/)
 * [Speech Recognition](speech-recognition/)
-* Optical Character Recognition
+* [Optical Character Recognition](optical-character-recognition/)
 * Part-of-speech, Morphological Analysis
 * Full Syntactic Analysis
 * [Named Entity Recognition](named-entity-recognition/)
