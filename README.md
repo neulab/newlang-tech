@@ -20,7 +20,7 @@ We also provide some pointers to general knowledge topics such as data collectio
 
 Please contact us via the "issues" in the github repository if you want to see something new or if you have any questions. If you want to contribute you can either contact via "issues" or send a PR directly.
 
-To see other examples of datasets or tools that were created with these directions, please click through to the 🏆**[Hall of Fame](hall_of_fame.md)**🏆 where you can see other like-minded projects!
+To see other examples of datasets or tools that were created with these directions, please click through to the 🏆[Hall of Fame](hall_of_fame.md)🏆 where you can see other like-minded projects!
 
 ## Other Resources
 
