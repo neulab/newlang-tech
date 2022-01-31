@@ -1,0 +1,8 @@
+{   
+    "embedding_dim": 100,
+    "hidden_dim":128,
+    "n_layers":2,
+    "bidirectional":true,
+    "dropout":0.25,
+    "batch_size": 128
+}
