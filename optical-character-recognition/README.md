@@ -8,7 +8,9 @@ This document covers multiple methods to perform OCR on documents in a new langu
 
 ## <a id="data"></a>Creating Data
 
-To evaluate the performance of various OCR techniques, you will need an evaluation dataset that contains manually transcribed scanned images in the target language. The evaluation dataset should ideally be a diverse set of documents with various features/fonts/artifacts that may affect the OCR performance. 
+To evaluate the performance of various OCR techniques, you will need a dataset that contains manually transcribed scanned images in the target language. The dataset should ideally be a diverse set of documents with various features/fonts/artifacts that may affect the OCR performance. 
+
+If a large number of pages can be manually transcribed, the data can be split into training and evaluation sets to build a *supervised* machine learning model for OCR. If only a small number of annotations can be created, you can use the entire set for evaluation with off-the-shelf OCR tools or *unsupervised* OCR methods.
 
 OCR annotation can be conducted as follows:
 * Given an image, the annotator is required to transcribe the text present in that image.
@@ -19,8 +21,6 @@ OCR annotation can be conducted as follows:
 * Note the [section on preprocessing](#preproc) below: if you plan to train your own OCR model, you may consider *automatically segmenting the pages into line images* and then doing annotation per line. This is not necessary for most pretrained tools/models since they internally perform segmentation.
 
 [Label Studio](https://labelstud.io) is an open-source annotation tool that has a ready-to-use OCR annotation format.
-
-If a large number of pages can be annotated, then the data can be split into training and evaluation sets for training a *supervised* machine learning model for OCR. If only a small evaluation set is available, off-the-shelf tools or *unsupervised* OCR can be used.
 
 
 ## Off-the-shelf OCR Tools
