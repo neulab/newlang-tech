@@ -4,5 +4,6 @@
     "n_layers":2,
     "bidirectional":true,
     "dropout":0.25,
-    "batch_size": 128
+    "batch_size": 128,
+    "n_epochs": 10,
 }
