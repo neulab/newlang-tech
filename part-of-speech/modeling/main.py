@@ -163,7 +163,7 @@ def main():
     criterion = criterion.to(device)
 
     if args.mode == "train":
-        N_EPOCHS = 10
+        N_EPOCHS = params["n_epochs"]
         best_valid_loss = float("inf")
         for epoch in range(N_EPOCHS):
             start_time = time.time()
